@@ -1,24 +1,20 @@
 import Circle from "@/icons/Circle";
 import { motion } from "framer-motion";
-import { CiTempHigh } from "react-icons/ci";
+import { FC } from "react";
 
-const HIGH = 40;
-const LOW = 20;
-
-type TemperatureProps = {
-  temperature: number;
+type HumidityProps = {
+  humidity: number;
 };
 
-const Temperature = ({ temperature }: TemperatureProps) => {
-  const status =
-    temperature > 30 ? "High" : temperature > 26 ? "Normal" : "Low";
+const Humidity: FC<HumidityProps> = ({ humidity }) => {
+  const status = humidity > 60 ? "High" : humidity > 40 ? "Normal" : "Low";
 
   return (
-    <div className="flex justify-between max-w-xs h-48 bg-gradient-to-r from-orange-500 to-yellow-600 p-4 rounded-xl">
+    <div className="flex justify-between max-w-xs h-48 bg-gradient-to-r from-blue-500 to-blue-600 p-4 rounded-xl">
       <div className="h-full flex flex-col justify-between">
         <div>
-          <h1 className="text-xs font-medium">Temperature</h1>
-          <h2 className="text-4xl font-bold">{temperature}°C</h2>
+          <h1 className="text-xs font-medium">Humidity</h1>
+          <h2 className="text-4xl font-bold">{humidity}%</h2>
         </div>
         <p className="flex items-center gap-1 text-xs rounded-full bg-black w-fit px-2 py-1">
           <Circle
@@ -31,20 +27,20 @@ const Temperature = ({ temperature }: TemperatureProps) => {
       </div>
       <div className="w-fit flex">
         <div className="flex flex-col justify-between h-full -translate-x-2 text-xs text-white/80">
-          <p>{HIGH}°C</p>
-          <p>{LOW}°C</p>
+          <p>100%</p>
+          <p>0%</p>
         </div>
         <div className="bg-black/70 rounded-full rotate-180 flex flex-col">
           <motion.div
             className="opacity-90 w-2 rounded"
             animate={{
-              height: `${((temperature - LOW) / (HIGH - LOW)) * 100}%`,
+              height: `${humidity}%`,
               backgroundColor:
-                temperature > 35
+                humidity > 60
                   ? "#bc4b51"
-                  : temperature > 30
+                  : humidity > 40
                   ? "#f4e285"
-                  : temperature > 26
+                  : humidity > 26
                   ? "#8cb369"
                   : "#bc4b51",
             }}
@@ -55,4 +51,4 @@ const Temperature = ({ temperature }: TemperatureProps) => {
   );
 };
 
-export default Temperature;
+export default Humidity;

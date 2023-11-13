@@ -1,5 +1,6 @@
 "use client";
 
+import Humidity from "@/components/Humidity";
 import Temperature from "@/components/Temperature";
 import { database } from "@/constants";
 import firebase from "firebase/compat/app";
@@ -38,6 +39,7 @@ const Home = () => {
       <div>{`Temp: ${data.Temp}`}</div>
       <div>{`Moisture ${data.Moisture ? data.Moisture : 0}`}</div>
       <Temperature temperature={data.Temp} />
+      <Humidity humidity={data.Hum} />
     </main>
   );
 };
