@@ -1,5 +1,6 @@
 "use client";
 
+import Temperature from "@/components/Temperature";
 import { database } from "@/constants";
 import firebase from "firebase/compat/app";
 import { get, onValue, ref } from "firebase/database";
@@ -36,6 +37,7 @@ const Home = () => {
       <div>{`Hum: ${data.Hum}`}</div>
       <div>{`Temp: ${data.Temp}`}</div>
       <div>{`Moisture ${data.Moisture ? data.Moisture : 0}`}</div>
+      <Temperature temperature={data.Temp} />
     </main>
   );
 };
