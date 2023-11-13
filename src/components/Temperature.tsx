@@ -15,19 +15,34 @@ const Temperature = ({ temperature }: TemperatureProps) => {
   return (
     <div className="flex justify-between max-w-xs h-48 bg-gradient-to-r from-orange-500 to-yellow-600 p-4 rounded-xl">
       <div className="h-full flex flex-col justify-between">
-        <h2 className="text-4xl font-bold">{temperature}^C</h2>
+        <div>
+          <h1 className="text-xs font-medium">Temperature</h1>
+          <h2 className="text-4xl font-bold">{temperature}°C</h2>
+        </div>
         <p className="flex items-center gap-1 text-xs rounded-full bg-black w-fit px-2 py-1">
           <Circle size={7} color={"red"} className="animate-pulse" /> Status:{" "}
           {status}
         </p>
       </div>
-      <div className=" rotate-180">
-        <motion.div
-          className="bg-green-400 w-2 rounded"
-          animate={{
-            height: `${((temperature - LOW) / (HIGH - LOW)) * 100}%`,
-          }}
-        />
+      <div className="w-fit flex">
+        <div className="flex flex-col justify-between h-full -translate-x-2 text-xs text-white/80">
+          <p>{HIGH}°C</p>
+          <p>{LOW}°C</p>
+        </div>
+        <div className="bg-black/70 rounded-full rotate-180 flex flex-col">
+          <motion.div
+            className="opacity-90 w-2 rounded"
+            animate={{
+              height: `${((temperature - LOW) / (HIGH - LOW)) * 100}%`,
+              backgroundColor:
+                temperature > 35
+                  ? "#bc4b51"
+                  : temperature > 30
+                  ? "#f4e285"
+                  : "#8cb369",
+            }}
+          />
+        </div>
       </div>
     </div>
   );
