@@ -14,7 +14,7 @@ const Temperature = ({ temperature }: TemperatureProps) => {
     temperature > 30 ? "High" : temperature > 26 ? "Normal" : "Low";
 
   return (
-    <div className="flex justify-between max-w-xs h-48 bg-gradient-to-r from-orange-500 to-yellow-600 p-4 rounded-xl">
+    <div className="flex justify-between w-64 h-48 bg-gradient-to-r from-orange-500 to-yellow-600 p-4 rounded-xl">
       <div className="h-full flex flex-col justify-between">
         <div>
           <h1 className="text-xs font-medium">Temperature</h1>

@@ -10,7 +10,7 @@ const Humidity: FC<HumidityProps> = ({ humidity }) => {
   const status = humidity > 60 ? "High" : humidity > 40 ? "Normal" : "Low";
 
   return (
-    <div className="flex justify-between max-w-xs h-48 bg-gradient-to-r from-blue-500 to-blue-600 p-4 rounded-xl">
+    <div className="flex justify-between w-64 h-48 bg-gradient-to-r from-blue-500 to-blue-600 p-4 rounded-xl">
       <div className="h-full flex flex-col justify-between">
         <div>
           <h1 className="text-xs font-medium">Humidity</h1>

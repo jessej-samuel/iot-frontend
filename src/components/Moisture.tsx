@@ -10,7 +10,7 @@ const Moisture: FC<MoistureProps> = ({ moisture }) => {
   const status = moisture > 60 ? "Wet" : moisture > 40 ? "Normal" : "Dry";
 
   return (
-    <div className="flex justify-between max-w-xs h-48 bg-gradient-to-r from-blue-500 to-blue-600 p-4 rounded-xl">
+    <div className="flex justify-between w-64 h-48 bg-gradient-to-r from-blue-500 to-blue-600 p-4 rounded-xl">
       <div className="h-full flex flex-col justify-between">
         <div>
           <h1 className="text-xs font-medium">Moisture</h1>
