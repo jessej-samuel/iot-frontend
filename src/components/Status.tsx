@@ -32,7 +32,7 @@ const Status: FC<StatusProps> = ({ lastRecordedTime }) => {
     return (
       <div className="flex gap-2 items-center bg-neutral-800 text-green-500 text-sm rounded-full px-3 py-1">
         <Circle size={7} color="#8cb369" className="animate-pulse" />
-        Systems offline
+        Systems online
       </div>
     );
   }
