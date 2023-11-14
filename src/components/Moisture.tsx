@@ -10,6 +10,10 @@ const mapToHeight = (value: number) => {
   return 50 + value * 50;
 };
 
+const getRoundPercentage = (value: number) => {
+  return Math.round(value * 10 * 100) / 10;
+};
+
 const Moisture: FC<MoistureProps> = ({ moisture }) => {
   const status = moisture > 0.3 ? "Wet" : moisture > -0.3 ? "Normal" : "Dry";
 
@@ -18,7 +22,9 @@ const Moisture: FC<MoistureProps> = ({ moisture }) => {
       <div className="h-full flex flex-col justify-between">
         <div>
           <h1 className="text-xs font-medium">Moisture</h1>
-          <h2 className="text-4xl font-bold">{moisture * 100}%</h2>
+          <h2 className="text-4xl font-bold">
+            {getRoundPercentage(moisture)}%
+          </h2>
         </div>
         <p className="flex items-center gap-1 text-xs rounded-full bg-black w-fit px-2 py-1">
           <Circle
