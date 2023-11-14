@@ -6,8 +6,12 @@ type MoistureProps = {
   moisture: number;
 };
 
+const mapToHeight = (value: number) => {
+  return 50 + value * 50;
+};
+
 const Moisture: FC<MoistureProps> = ({ moisture }) => {
-  const status = moisture > 60 ? "Wet" : moisture > 40 ? "Normal" : "Dry";
+  const status = moisture > 0.3 ? "Wet" : moisture > -0.3 ? "Normal" : "Dry";
 
   return (
     <div className="flex justify-between w-64 h-48 bg-gradient-to-r from-blue-500 to-blue-600 p-4 rounded-xl">
@@ -26,21 +30,18 @@ const Moisture: FC<MoistureProps> = ({ moisture }) => {
         </p>
       </div>
       <div className="w-fit flex">
-        <div className="flex flex-col justify-between h-full -translate-x-2 text-xs text-white/80">
+        <div className="flex flex-col justify-between items-end h-full -translate-x-2 text-xs text-white/80">
           <p>100%</p>
           <p>0%</p>
+          <p>-100%</p>
         </div>
         <div className="bg-black/70 rounded-full rotate-180 flex flex-col">
           <motion.div
             className="opacity-90 w-2 rounded"
             animate={{
-              height: `${moisture * 100}%`,
+              height: `${mapToHeight(moisture)}%`,
               backgroundColor:
-                moisture > 60 || moisture < 26
-                  ? "#bc4b51"
-                  : moisture > 40
-                  ? "#f4e285"
-                  : "#8cb369",
+                status == "Wet" || status == "Dry" ? "#bc4b51" : "#8cb369",
             }}
           />
         </div>
