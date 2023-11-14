@@ -41,7 +41,7 @@ const Home = () => {
   }, []);
 
   return (
-    <main className="min-h-screen flex flex-col justify-evenly items-center w-full">
+    <main className="min-h-screen flex gap-4 flex-col xl:flex-row  justify-evenly items-center w-full">
       <Status lastRecordedTime={data.lastActive} />
       <Temperature temperature={data.Temp} />
       <Humidity humidity={data.Hum} />
