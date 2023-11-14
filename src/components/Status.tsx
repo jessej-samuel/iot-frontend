@@ -1,37 +1,59 @@
-import { FC, useEffect, useState } from "react";
+import Circle from "@/icons/Circle";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 
 type StatusProps = {
   lastRecordedTime: number;
 };
-const allowedDelay = 15; // 15 seconds
-const checkStatus = ({
-  lastRecordedTime,
-  setActive,
-}: {
-  lastRecordedTime: number;
-  setActive: Function;
-}) => {
-  const now = Math.round(Date.now() / 1000);
-  const difference = now - lastRecordedTime;
-  if (difference < allowedDelay) {
-    setActive(true);
-  } else {
-    setActive(false);
-  }
-};
+const allowedDelay = 15000; // 15 seconds
 
 const Status: FC<StatusProps> = ({ lastRecordedTime }) => {
   const [active, setActive] = useState(false);
 
-  useEffect(() => {
-    checkStatus({ lastRecordedTime, setActive });
-    const interval = setInterval(() => {
-      checkStatus({ lastRecordedTime, setActive });
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [lastRecordedTime]);
+  const checkStatus = (
+    lastRecordedTime: number,
+    setActive: Dispatch<SetStateAction<boolean>>
+  ) => {
+    const now = Date.now();
+    const difference = now - lastRecordedTime * 1000;
+    if (difference < allowedDelay) {
+      setActive(true);
+      console.log("active");
+    } else {
+      setActive(false);
+      console.log("inactive");
+    }
+    console.log(now, lastRecordedTime, difference);
+  };
 
-  return <div>Systems {active ? "online" : "offline"}</div>;
+  useEffect(() => {
+    checkStatus(lastRecordedTime, setActive);
+    const interval = setInterval(
+      () => checkStatus(lastRecordedTime, setActive),
+      1000
+    );
+    console.log("interval", interval);
+    return () => {
+      console.log("clearing interval", interval);
+      clearInterval(interval);
+      console.log("state", active);
+    };
+  }, [lastRecordedTime, active]);
+
+  if (active) {
+    return (
+      <div className="flex gap-2 items-center bg-neutral-800 text-green-500 text-sm rounded-full px-3 py-1">
+        <Circle size={7} color="#8cb369" className="animate-pulse" />
+        Systems offline
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex gap-2 items-center bg-neutral-800 text-red-500 text-sm rounded-full px-3 py-1">
+      <Circle size={7} color="#bc4b51" className="animate-pulse" />
+      Systems offline
+    </div>
+  );
 };
 
 export default Status;
