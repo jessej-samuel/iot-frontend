@@ -15,14 +15,8 @@ const Status: FC<StatusProps> = ({ lastRecordedTime }) => {
   ) => {
     const now = Date.now();
     const difference = now - lastRecordedTime * 1000;
-    if (difference < allowedDelay) {
-      setActive(true);
-      console.log("active");
-    } else {
-      setActive(false);
-      console.log("inactive");
-    }
-    console.log(now, lastRecordedTime, difference);
+    if (difference < allowedDelay) setActive(true);
+    else setActive(false);
   };
 
   useEffect(() => {
@@ -31,12 +25,7 @@ const Status: FC<StatusProps> = ({ lastRecordedTime }) => {
       () => checkStatus(lastRecordedTime, setActive),
       1000
     );
-    console.log("interval", interval);
-    return () => {
-      console.log("clearing interval", interval);
-      clearInterval(interval);
-      console.log("state", active);
-    };
+    return () => clearInterval(interval);
   }, [lastRecordedTime, active]);
 
   if (active) {

@@ -19,7 +19,6 @@ interface Data {
 const getData = async () => {
   const snapshot = await get(ref(database, "/"));
   const data = await snapshot.val();
-  console.log(data);
   return Response.json({ ...data });
 };
 
@@ -37,7 +36,6 @@ const Home = () => {
       .then((data) => setData(data));
     onValue(ref(database, "/"), (snapshot) => {
       const data = snapshot.val();
-      console.log(data);
       setData(data);
     });
   }, []);
